@@ -733,3 +733,12 @@ function backToCart() {
     document.getElementById("cart-page").style.display = "block";
     displayCart();
 }
+function continueShopping() {
+    document.getElementById("success-page").style.display = "none";
+
+    document.querySelector(".hero").style.display = "block";
+    document.querySelector(".category-title").style.display = "block";
+    document.querySelector(".categories").style.display = "grid";
+    document.querySelector(".smart-health-section").style.display = "block";
+    document.querySelector(".bharat-care-section").style.display = "block";
+}
