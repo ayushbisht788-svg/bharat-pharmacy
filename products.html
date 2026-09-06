@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bharat Pharmacy</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="products.css">
+</head>
+
+<body>
+
+<header>
+
+    <h1><span class="india-flag"></span>Bharat Pharmacy</h1>
+<p class="tagline">Your Health, Our Priority</p>
+
+   <div class="header-actions">
+
+    <div class="coins">
+        🪙 <span id="coinCount">500</span>
+        <button onclick="addCoins()">+</button>
+    </div>
+
+    <button class="cart-btn" onclick="openCart()">
+        🛒 Cart (<span id="cartCount">0</span>)
+    </button>
+    <div class="ai-shortcut" onclick="document.querySelector('.bharat-care-section').scrollIntoView({ behavior: 'smooth' });">
+    🤖 Need Health Assistance? Ask Bharat Care AI →
+</div>
+
+</div>
+
+</header>
+
+<section class="hero">
+    <h2>Welcome to Bharat Pharmacy</h2>
+    <p>Your Trusted Partner for Better Health</p>
+
+    <div class="delivery-banner">
+        🚚
+        <strong>Healthcare Essentials Delivered in ~30 Minutes</strong>
+        <span>Fast delivery for your everyday pharmacy needs.</span>
+    </div>
+
+    <button>Shop Now</button>
+</section>
+
+<section class="category-title">
+
+    <h2>🛍 Shop by Category</h2>
+
+    <p>Select a category to explore products</p>
+
+</section>
+
+<div class="categories">
+
+    <div class="category-card" onclick="showProducts('Medicines')">
+    <div class="icon">💊</div>
+    <h3>Medicines</h3>
+    <p>Common Healthcare Needs</p>
+</div>
+
+    <div class="category-card" onclick="showProducts('First Aid')">
+    <div class="icon">🩹</div>
+    <h3>First Aid</h3>
+    <p>Essential First Aid Supplies</p>
+</div>
+
+<div class="category-card" onclick="showProducts('Hygiene Items')">
+    <div class="icon">🧼</div>
+    <h3>Hygiene Items</h3>
+    <p>Everyday Hygiene Essentials</p>
+</div>
+
+   <div class="category-card" onclick="showProducts('Baby Care')">
+    <div class="icon">👶</div>
+    <h3>Baby Care</h3>
+    <p>Gentle Care for Little Ones</p>
+</div>
+
+</div>
+<section class="smart-health-section">
+    <h2>🥗 Smart Health Choices</h2>
+    <p>Make informed choices for your everyday health.</p>
+
+   <div class="smart-health-card">
+        <div class="icon">🍯</div>
+        <h3>Smart Sweet Choices</h3>
+        <p>Naturally sweet and nutritious options for your everyday sweet cravings.</p>
+        <button onclick="showProducts('Smart Sweet Choices')">
+            Explore Choices →
+        </button>
+    </div>
+
+    <div class="smart-health-card">
+        <div class="icon">🫒</div>
+        <h3>Smart Oil Choices</h3>
+        <p>Explore everyday cooking oils for smarter kitchen choices.</p>
+        <button onclick="showProducts('Smart Oil Choices')">
+            Explore Choices →
+        </button>
+    </div>
+    <div class="smart-health-card">
+    <div class="icon">🥜</div>
+    <h3>Smart Snack Choices</h3>
+    <p>Discover tasty and satisfying options for everyday snacking.</p>
+    <button onclick="showProducts('Smart Snack Choices')">
+        Explore Choices →
+    </button>
+</div>
+</section>
+
+<section class="bharat-care-section">
+    <h2>🤖 Bharat Care AI</h2>
+    <p>Get simple health guidance and find suitable products from Bharat Pharmacy.</p>
+
+    <div class="bharat-care-box">
+        <input
+            type="text"
+            id="ai-question"
+            placeholder="Ask Bharat Care AI..."
+        >
+
+        <button onclick="askBharatCare()">
+            Ask Bharat Care AI
+        </button>
+
+        <div id="ai-response"></div>
+    </div>
+</section>
+
+<section class="category-page" id="grocery-page">
+
+    <button class="back-btn" onclick="goBack()">
+        ← Back to Categories
+    </button>
+
+    <h2>🥦 Fresh Grocery Collection</h2>
+
+    <p>Daily essentials delivered with quality</p>
+
+    <div class="search-section">
+
+        <input
+            type="text"
+            id="searchBox"
+            placeholder="Search Grocery Products..."
+            onkeyup="searchProducts()">
+
+    </div>
+
+    <div class="products" id="product-list">
+        </div>
+
+</section>
+<section class="cart-page" id="cart-page" style="display: none;">
+
+    <button class="back-btn" onclick="closeCart()">
+        ← Back to Shopping
+    </button>
+
+    <h2>🛒 Your Grocery Cart</h2>
+
+    <div id="cart-items">
+    </div>
+
+    <div class="cart-summary">
+        <button onclick="proceedToCheckout()" class="checkout-btn">
+            Proceed to Checkout
+        </button>
+
+    </div>
+
+</section>
+<section class="checkout-page" id="checkout-page" style="display: none;">
+
+    <button class="back-btn" onclick="backToCart()">
+        ← Back to Cart
+    </button>
+
+    <h2>📦 Checkout</h2>
+
+    <div class="checkout-container">
+
+        <div class="customer-details">
+
+            <h3>Delivery Details</h3>
+
+            <label>Full Name</label>
+            <input type="text" id="customerName" placeholder="Enter your name">
+
+            <label>Mobile Number</label>
+            <input type="tel" id="customerPhone" placeholder="Enter mobile number">
+
+            <label>Address</label>
+            <textarea id="customerAddress" placeholder="Enter your full address"></textarea>
+
+            <label>City</label>
+            <input type="text" id="customerCity" placeholder="Enter city">
+
+            <label>State</label>
+            <input type="text" id="customerState" placeholder="Enter state">
+
+            <label>Pincode</label>
+            <input type="text" id="customerPincode" placeholder="Enter pincode">
+
+        </div>
+
+        <div class="checkout-summary">
+
+            <h3>Order Summary</h3>
+
+            <div id="checkout-items">
+</div>
+<section class="ludo-section">
+    <h2>🎮 Play & Get a Discount</h2>
+    <p>Play our mini Ludo challenge and earn a discount on your order!</p>
+
+    <div class="ludo-card">
+        <h3>🎲 Ludo Discount Challenge</h3>
+
+        <p>Roll the dice and reach the target score within 3 chances.</p>
+
+        <button onclick="startLudo()">
+            Play Now 🎮
+        </button>
+
+        <div id="ludo-game" style="display: none;">
+            <div id="ludo-board">
+    <div class="ludo-path">
+       <span>🏠</span>
+<span id="ludo-cell-1">⬜</span>
+<span id="ludo-cell-2">⬜</span>
+<span id="ludo-cell-3">⬜</span>
+<span id="ludo-cell-4">⬜</span>
+<span id="ludo-cell-5">⬜</span>
+<span>🏆</span>
+    </div>
+</div>
+           <p>🎯 Target Score: <strong>12</strong></p>
+<p>Chances Left: <strong id="ludo-chances">3</strong></p>
+<p>Score: <strong id="ludo-score">0</strong></p>
+
+            <div id="ludo-dice">⚀</div>
+
+<button onclick="rollLudoDice()">
+    Roll Dice 🎲
+</button>
+
+            <div id="ludo-result"></div>
+        </div>
+    </div>
+</section>
+<div class="checkout-price-summary">
+    <p>
+        Subtotal:
+        🪙 <span id="checkout-subtotal">0</span> Coins
+    </p>
+
+    <p>
+        Ludo Discount:
+        <strong>-🪙 <span id="checkout-discount">0</span> Coins</strong>
+    </p>
+
+    <h3>
+        Final Total:
+        🪙 <span id="checkout-total">0</span> Coins
+    </h3>
+</div>
+<div class="delivery-estimate">
+    <h3>🚚 Estimated Delivery</h3>
+    <p><strong>Approximately 30 minutes</strong></p>
+    <p>
+        Your location is estimated to be around 30 minutes
+        from our pharmacy based on the current delivery distance.
+    </p>
+
+    <p class="delivery-warning">
+        ⚠️ <strong>Important:</strong> This is an estimated delivery time,
+        not an exact guarantee. Actual delivery time may vary depending
+        on traffic, road conditions, driver availability, vehicle speed,
+        weather, and other circumstances.
+    </p>
+</div>
+
+<hr>
+            <button class="place-order-btn" onclick="placeOrder()">
+                Place Order
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+<section class="success-page" id="success-page" style="display: none;">
+
+    <div class="success-box">
+
+        <div class="success-icon">✓</div>
+
+        <h2>Order Placed Successfully!</h2>
+
+        <p>Thank you for shopping at Bharat Pharmacy.</p>
+
+        <div class="order-info">
+
+            <p>
+                <strong>Order ID:</strong>
+                <span id="success-order-id"></span>
+            </p>
+
+            <p>
+                <strong>Total:</strong>
+                🪙 <span id="success-order-total"></span>
+                Coins
+            </p>
+
+        </div>
+
+        <button onclick="continueShopping()">
+            Continue Shopping
+        </button>
+
+    </div>
+
+</section>
+<script src="products-data.js"></script>
+<script src="products.js"></script>
+
+</body>
+</html>

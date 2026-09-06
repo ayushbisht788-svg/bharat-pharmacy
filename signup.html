@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bharat Pharmacy - Sign Up</title>
+    <link rel="stylesheet" href="signup.css">
+</head>
+
+<body>
+
+    <div class="signup-container">
+        <h2>🏥 Bharat Pharmacy</h2>
+        <h3>Create Your Account</h3>
+
+        <form>
+            <label>Full Name</label>
+            <input type="text" id="signupName" placeholder="Enter your name">
+
+            <label>Email</label>
+            <input type="email" id="signupEmail" placeholder="Enter your email">
+
+            <label>Password</label>
+            <input type="password" id="signupPassword" placeholder="Create a password">
+
+            <button type="button" onclick="createAccount()">
+                Sign Up
+            </button>
+        </form>
+
+        <p>Already have an account? <a href="login.html">Login</a></p>
+    </div>
+
+    <script>
+        function createAccount() {
+            let name = document.getElementById("signupName").value;
+         let email = document.getElementById("signupEmail").value;
+            let password = document.getElementById("signupPassword").value;
+
+            if (name === "" || email === "" || password === "") {
+                alert("Please fill all details.");
+                return;
+            }
+
+            localStorage.setItem("userName", name);
+            localStorage.setItem("userEmail", email);
+            localStorage.setItem("userPassword", password);
+
+            alert("Account created successfully!");
+            window.location.href = "login.html";
+        }
+    </script>
+
+</body>
+</html>

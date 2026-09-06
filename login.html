@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Bharat Pharmacy</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+
+    <div class="login-box">
+        <h1>Bharat Pharmacy</h1>
+        <h2>Welcome Back!</h2>
+
+      <input type="email" id="loginEmail" placeholder="Enter your email">
+<input type="password" id="loginPassword" placeholder="Enter your password">
+
+      <button onclick="loginUser()">Login</button>
+
+      <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
+      <script>
+function loginUser() {
+   let email = document.getElementById("loginEmail").value.trim().toLowerCase();
+let password = document.getElementById("loginPassword").value;
+
+    let savedEmail = localStorage.getItem("userEmail");
+    let savedPassword = localStorage.getItem("userPassword");
+
+    if (savedEmail === null || savedPassword === null) {
+        alert("No account found. Please Sign Up first.");
+        return;
+    }
+
+    if (email === savedEmail && password === savedPassword) {
+        window.location.href = "products.html";
+    } else {
+        alert("Incorrect email or password.");
+    }
+}
+</script>
+
+</body>
+</html>
