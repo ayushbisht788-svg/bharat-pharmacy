@@ -448,6 +448,7 @@ function placeOrder() {
     document.getElementById("success-order-total").innerText = orderTotal;
 
     cart = [];
+    ludoDiscount = 0;
 
     updateCartCount();
 
