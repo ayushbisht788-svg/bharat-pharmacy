@@ -66,7 +66,6 @@ document.querySelector(".bharat-care-section").style.display = "block";
 
     document.getElementById("searchBox").value = "";
     document.getElementById("product-list").innerHTML = "";
-
 }
 
 // ----------------------
@@ -204,8 +203,9 @@ function openCart() {
     document.querySelector(".hero").style.display = "none";
     document.querySelector(".category-title").style.display = "none";
     document.querySelector(".categories").style.display = "none";
+    document.querySelector(".smart-health-section").style.display = "none";
+document.querySelector(".bharat-care-section").style.display = "none";
     document.getElementById("grocery-page").style.display = "none";
-
     document.getElementById("cart-page").style.display = "block";
 
     displayCart();
@@ -219,6 +219,8 @@ function closeCart() {
     document.querySelector(".hero").style.display = "block";
     document.querySelector(".category-title").style.display = "block";
     document.querySelector(".categories").style.display = "grid";
+    document.querySelector(".smart-health-section").style.display = "block";
+document.querySelector(".bharat-care-section").style.display = "block";
 
 }
 function displayCart() {
@@ -610,6 +612,8 @@ function showSingleProduct(productName) {
     document.querySelector(".category-title").style.display = "none";
     document.querySelector(".categories").style.display = "none";
     document.getElementById("grocery-page").style.display = "block";
+    document.querySelector("#grocery-page h2").style.display = "none";
+document.querySelector(".search-section").style.display = "none";
 
     let product = products.find(function(item) {
         return item.name === productName;
@@ -676,7 +680,7 @@ function rollLudoDice() {
         dice.innerText = diceFaces[diceNumber - 1];
 
         ludoScore = ludoScore + diceNumber;
-        ludoChances--;
+        ludoChances = Math.max(0, ludoChances - 1);
         ludoPosition = Math.min(ludoPosition + diceNumber, 5);
 
 for (let i = 1; i <= 5; i++) {
