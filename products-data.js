@@ -6,7 +6,7 @@ const products = [
     category: "Medicines",
     price: 30,
     description: "Common medicine used for temporary relief of fever and mild pain.",
-    image: "images/medicines/paracetamol.jpg"
+    image: "images/medicines/Paracetamol.jpg"
 },
 {
     id: 2,
