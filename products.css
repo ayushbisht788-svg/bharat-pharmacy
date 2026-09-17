@@ -738,7 +738,7 @@ header h1{
     }
 }
 .my-orders-page {
-    display: block !important;
+    display: none;
     min-height: 70vh;
     padding: 40px 20px;
     background: #f4f7f9;
