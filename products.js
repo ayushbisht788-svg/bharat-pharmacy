@@ -442,6 +442,62 @@ function placeOrder() {
 
     let orderTotal =
         document.getElementById("checkout-total").innerText;
+        let savedOrders = JSON.parse(localStorage.getItem("bharatPharmacyOrders")) || [];
+
+let totalItems = 0;
+
+cart.forEach(function(item) {
+    totalItems += item.quantity;
+});
+
+let newOrder = {
+    id: orderId,
+    customer: name,
+    phone: phone,
+    address: address,
+    city: city,
+    state: state,
+    pincode: pincode,
+    items: totalItems,
+    products: cart.map(function(item) {
+        return {
+            name: item.name,
+            quantity: item.quantity,
+            price: item.price
+        };
+    }),
+    total: parseInt(orderTotal.replace(/[^0-9]/g, "")) || 0,
+    status: "Processing",
+    date: new Date().toLocaleString()
+};
+
+savedOrders.push(newOrder);
+let inventory = JSON.parse(
+    localStorage.getItem("bharatPharmacyInventory")
+) || {};
+
+cart.forEach(function(item) {
+
+    if (inventory[item.name] !== undefined) {
+        inventory[item.name] -= item.quantity;
+    }
+
+});
+
+localStorage.setItem(
+    "bharatPharmacyInventory",
+    JSON.stringify(inventory)
+);
+
+// Keep only the latest 5 orders
+if (savedOrders.length > 5) {
+    savedOrders = savedOrders.slice(-5);
+}
+
+localStorage.setItem(
+    "bharatPharmacyOrders",
+    JSON.stringify(savedOrders)
+);
 
     document.getElementById("success-order-id").innerText = orderId;
 
@@ -746,4 +802,131 @@ function continueShopping() {
     document.querySelector(".categories").style.display = "grid";
     document.querySelector(".smart-health-section").style.display = "block";
     document.querySelector(".bharat-care-section").style.display = "block";
+}
+function trackCurrentOrder() {
+    let orderId = document.getElementById("success-order-id").innerText;
+
+    let orders = JSON.parse(localStorage.getItem("bharatPharmacyOrders")) || [];
+
+    let order = orders.find(function(item) {
+        return item.id === orderId;
+    });
+
+    if (!order) {
+        alert("Order information not found.");
+        return;
+    }
+
+    document.getElementById("success-page").style.display = "none";
+    document.getElementById("tracking-page").style.display = "block";
+
+    document.getElementById("tracking-order-id").innerText = order.id;
+
+    updateTrackingDisplay(order.status);
+}
+function updateTrackingDisplay(status) {
+
+    let steps = [
+        "track-processing",
+        "track-confirmed",
+        "track-packed",
+        "track-delivery",
+        "track-delivered"
+    ];
+
+    steps.forEach(function(step) {
+        document.getElementById(step).classList.remove("active");
+    });
+
+    let statusMap = {
+        "Processing": 0,
+        "Confirmed": 1,
+        "Packed": 2,
+        "Out for Delivery": 3,
+        "Delivered": 4
+    };
+
+    let currentStep = statusMap[status];
+
+    for (let i = 0; i <= currentStep; i++) {
+        document.getElementById(steps[i]).classList.add("active");
+    }
+
+    document.getElementById("tracking-message").innerText =
+        "Current Status: " + status;
+}
+function openMyOrders() {
+
+    document.querySelector(".hero").style.display = "none";
+    document.querySelector(".category-title").style.display = "none";
+    document.querySelector(".categories").style.display = "none";
+    document.querySelector(".smart-health-section").style.display = "none";
+    document.querySelector(".bharat-care-section").style.display = "none";
+
+    document.getElementById("grocery-page").style.display = "none";
+    document.getElementById("cart-page").style.display = "none";
+    document.getElementById("checkout-page").style.display = "none";
+    document.getElementById("success-page").style.display = "none";
+    document.getElementById("tracking-page").style.display = "none";
+
+    document.getElementById("my-orders-page").style.display = "block";
+
+    loadMyOrders();
+}
+function loadMyOrders() {
+
+    let orders = JSON.parse(
+        localStorage.getItem("bharatPharmacyOrders")
+    ) || [];
+
+    let orderList = document.getElementById("my-orders-list");
+
+    if (orders.length === 0) {
+        orderList.innerHTML = "<p>No orders found.</p>";
+        return;
+    }
+
+    orderList.innerHTML = "";
+
+    orders.slice().reverse().forEach(function(order) {
+
+        orderList.innerHTML +=
+            "<div class='my-order-card'>" +
+            "<h3>Order #" + order.id + "</h3>" +
+            "<p><strong>Products:</strong> " +
+            order.products.map(function(product) {
+                return product.name + " × " + product.quantity;
+            }).join(", ") +
+            "</p>" +
+            "<p><strong>Total:</strong> 🪙 " + order.total + " Coins</p>" +
+            "<p><strong>Status:</strong> " + order.status + "</p>" +
+            "<button onclick=\"trackOrderFromMyOrders('" + order.id + "')\">" +
+            "🚚 Track Order" +
+            "</button>" +
+            "</div>";
+
+    });
+
+}
+function trackOrderFromMyOrders(orderId) {
+
+    let orders = JSON.parse(
+        localStorage.getItem("bharatPharmacyOrders")
+    ) || [];
+
+    let order = orders.find(function(item) {
+        return item.id === orderId;
+    });
+
+    if (!order) {
+        alert("Order information not found.");
+        return;
+    }
+
+    document.getElementById("my-orders-page").style.display = "none";
+    document.getElementById("tracking-page").style.display = "block";
+
+    document.getElementById("tracking-order-id").innerText = order.id;
+
+    updateTrackingDisplay(order.status);
 }

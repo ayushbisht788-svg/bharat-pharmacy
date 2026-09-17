@@ -31,6 +31,9 @@
     <button class="cart-btn" onclick="openCart()">
         🛒 Cart (<span id="cartCount">0</span>)
     </button>
+    <button class="orders-btn" onclick="openMyOrders()">
+    📦 My Orders
+</button>
     <div class="ai-shortcut" onclick="document.querySelector('.bharat-care-section').scrollIntoView({ behavior: 'smooth' });">
     🤖 Need Health Assistance? Ask Bharat Care AI →
 </div>
@@ -327,6 +330,81 @@
             </p>
 
         </div>
+
+        <button onclick="continueShopping()">
+            Continue Shopping
+        </button>
+        <button onclick="trackCurrentOrder()">
+    🚚 Track My Order
+</button>
+
+   </div>
+</section>
+
+<section class="my-orders-page" id="my-orders-page" style="display: none;">
+
+    <div class="my-orders-box">
+
+        <h2>📦 My Orders</h2>
+
+        <div id="my-orders-list">
+            <p>No orders found.</p>
+        </div>
+
+        <button onclick="closeMyOrders()">
+            Continue Shopping
+        </button>
+
+    </div>
+
+</section>
+
+<section class="tracking-page" id="tracking-page" style="display: none;">
+
+    <div class="tracking-box">
+
+        <h2>🚚 Track Your Order</h2>
+
+        <p><strong>Order ID:</strong> <span id="tracking-order-id"></span></p>
+
+        <div class="tracking-status">
+
+            <div class="tracking-step" id="track-processing">
+                <span>✓</span>
+                <p>Order Processing</p>
+            </div>
+
+            <div class="tracking-line"></div>
+
+            <div class="tracking-step" id="track-confirmed">
+                <span>✓</span>
+                <p>Order Confirmed</p>
+            </div>
+
+            <div class="tracking-line"></div>
+
+            <div class="tracking-step" id="track-packed">
+                <span>✓</span>
+                <p>Packed</p>
+            </div>
+
+            <div class="tracking-line"></div>
+
+            <div class="tracking-step" id="track-delivery">
+                <span>🚚</span>
+                <p>Out for Delivery</p>
+            </div>
+
+            <div class="tracking-line"></div>
+
+            <div class="tracking-step" id="track-delivered">
+                <span>✓</span>
+                <p>Delivered</p>
+            </div>
+
+        </div>
+
+        <p id="tracking-message"></p>
 
         <button onclick="continueShopping()">
             Continue Shopping

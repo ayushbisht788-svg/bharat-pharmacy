@@ -71,3 +71,16 @@ body {
     color: #000080;
     font-weight: bold;
 }
+.admin-link {
+    margin-top: 20px;
+}
+
+.admin-link a {
+    color: #1b5e20;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.admin-link a:hover {
+    text-decoration: underline;
+}

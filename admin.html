@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Bharat Pharmacy - Admin Dashboard</title>
+
+    <link rel="stylesheet" href="admin.css">
+</head>
+
+<body>
+
+    <div class="admin-layout">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+
+            <div class="sidebar-logo">
+                <div class="logo-icon">🏥</div>
+
+                <div>
+                    <h2>Bharat Pharmacy</h2>
+                    <p>Admin Panel</p>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+
+                <a href="#dashboard" class="active">
+                    📊 Dashboard
+                </a>
+
+                <a href="#orders">
+                    📦 Orders
+                </a>
+
+                <a href="#sales">
+                    📈 Sales Analysis
+                </a>
+
+                <a href="#inventory">
+                    🏷️ Inventory
+                </a>
+
+            </nav>
+
+<div class="sidebar-bottom">
+
+    <div class="admin-profile">
+
+        <div class="profile-icon">👤</div>
+
+        <div>
+            <strong>Administrator</strong>
+            <small>System Manager</small>
+        </div>
+
+    </div>
+
+    <button class="logout-btn" onclick="adminLogout()">
+        🚪 Logout
+    </button>
+
+</div>
+                    <div>
+                        
+                        <strong>Administrator</strong>
+                        <small>System Manager</small>
+                    </div>
+                </div>
+
+            </div>
+
+        </aside>
+
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+
+
+            <!-- TOP BAR -->
+            <header class="topbar">
+
+                <div>
+                    <h1>Dashboard</h1>
+                    <p>Welcome back, Administrator</p>
+                </div>
+
+                <div class="system-status">
+                    <span></span>
+                    System Active
+                </div>
+
+            </header>
+
+
+            <!-- DASHBOARD -->
+            <section id="dashboard">
+
+                <div class="section-title">
+
+                    <div>
+                        <h2>Overview</h2>
+                        <p>Today's pharmacy performance</p>
+                    </div>
+
+                </div>
+
+
+                <!-- STAT CARDS -->
+                <div class="dashboard-cards">
+
+
+                    <div class="dashboard-card">
+
+                        <div class="stat-icon">📦</div>
+
+                        <div>
+                            <span>Total Orders</span>
+                            <strong id="total-orders">0</strong>
+                        </div>
+
+                    </div>
+
+
+                    <div class="dashboard-card">
+
+                        <div class="stat-icon">🛒</div>
+
+                        <div>
+                            <span>Items Sold</span>
+                            <strong id="total-items">0</strong>
+                        </div>
+
+                    </div>
+
+
+                    <div class="dashboard-card">
+
+                        <div class="stat-icon">💰</div>
+
+                        <div>
+                            <span>Total Revenue</span>
+                            <strong id="total-revenue">₹0</strong>
+                        </div>
+
+                    </div>
+
+
+                    <div class="dashboard-card">
+
+                        <div class="stat-icon">🚚</div>
+
+                        <div>
+                            <span>Pending Orders</span>
+                            <strong id="pending-orders">0</strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ORDERS -->
+            <section id="orders" class="content-section">
+
+                <div class="section-title">
+
+                    <div>
+                        <h2>📦 Recent Orders</h2>
+                        <p>Manage customer orders and delivery status</p>
+                    </div>
+
+                </div>
+
+                <div id="orders-list">
+                    <p>No orders yet.</p>
+                </div>
+
+            </section>
+
+
+            <!-- SALES -->
+            <section id="sales" class="content-section">
+<div class="section-title">
+
+                    <div>
+                        <h2>📈 Sales Analysis</h2>
+                        <p>Track product demand and order performance</p>
+                    </div>
+
+                </div>
+
+
+                <div class="analysis-section">
+
+
+                    <div class="analysis-card">
+
+                        <div class="analysis-icon">
+                            🛒
+                        </div>
+
+                        <div>
+                            <span>Most Bought Product</span>
+                            <strong id="top-product">
+                                No data yet
+                            </strong>
+                        </div>
+
+                    </div>
+
+
+                    <div class="analysis-card">
+
+                        <div class="analysis-icon">
+                            💰
+                        </div>
+
+                        <div>
+                            <span>Average Order Value</span>
+                            <strong id="average-order">
+                                ₹0
+                            </strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="sales-chart">
+
+                    <div class="chart-title">
+                        <h3>Product Sales</h3>
+                        <p>Units sold by product</p>
+                    </div>
+
+                    <div id="sales-chart"></div>
+
+                </div>
+
+            </section>
+
+
+            <!-- INVENTORY -->
+            <section id="inventory" class="content-section">
+
+                <div class="section-title">
+
+                    <div>
+                        <h2>🏷️ Inventory Management</h2>
+                        <p>Monitor current product stock</p>
+                    </div>
+
+                    <div class="inventory-live">
+                        ● Live Inventory
+                    </div>
+
+                </div>
+
+
+                <div class="inventory-card">
+
+                    <div class="inventory-header">
+
+                        <div>
+                            <h3>Product Inventory</h3>
+                            <p>Current stock availability</p>
+                        </div>
+
+                    </div>
+
+
+                    <div id="inventory-list">
+
+                        <p>Loading inventory...</p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+        </main>
+
+    </div>
+
+
+    <script src="products-data.js"></script>
+    <script src="admin.js"></script>
+
+</body>
+
+</html>
